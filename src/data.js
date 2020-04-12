@@ -10,4 +10,9 @@ function initMatrix(height, width) {
             matrix[x][y] = 0
         }
     }
+function takeRandomPiece() {
+    let totalPieces = pieces.length - 1
+    let randomPieceIndex = Math.round(Math.random() * totalPieces)
+
+    return pieces[randomPieceIndex]
 }
