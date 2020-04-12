@@ -11,12 +11,12 @@ function init() {
 function draw() {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
-            drowSquare({x: i * 40, y: j * 40}, 40, 4, "yellow")
+            drawSquare({x: i * 40, y: j * 40}, 40, 4, "yellow")
         }
     }
 }
 
-function drowSquare(position, side, padding, color) {
+function drawSquare(position, side, padding, color) {
     context.fillStyle = color
     context.fillRect(
         position.x + padding,
