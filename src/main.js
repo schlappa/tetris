@@ -24,8 +24,6 @@ function initMatrix(height, width) {
             matrix[x][y] = 0
         }
     }
-
-    matrix[2][2] = 1
 }
 
 function drawMatrix() {
