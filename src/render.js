@@ -1,5 +1,8 @@
 var context
 
+const SQUARE_SIDE = 40;
+const SQUARE_SIDE_PADDING = 5;
+
 function initCanvas(canvasId) {
     var canvas = document.getElementById(canvasId)
 
@@ -14,10 +17,15 @@ function drawMatrix() {
 
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
-            if (matrix[x][y] === 1)
-                drawSquare({ x: x * 40, y: y * 40 }, 40, 5, "yellow")
-            else
-                drawSquare({ x: x * 40, y: y * 40 }, 40, 5, "#222")
+            let position = {
+                x: x * SQUARE_SIDE,
+                y: y * SQUARE_SIDE
+            }
+            let color = matrix[x][y] === 1
+                ? "yellow"
+                : "#222"
+
+            drawSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
         }
     }
 }
