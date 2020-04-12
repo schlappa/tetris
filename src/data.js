@@ -1,7 +1,9 @@
-// TODO: improve how can be hanlded only by the js, use let
-var matrix
+import { pieces } from './seed.js'
+import { appendSubMatrixToMatrix } from './render.js'
 
-function initMatrix(height, width) {
+export let matrix
+
+export function initMatrix(height, width) {
     matrix = []
 
     for (let x = 0; x < height; x++) {
@@ -10,6 +12,11 @@ function initMatrix(height, width) {
             matrix[x][y] = 0
         }
     }
+
+    let piece = takeRandomPiece()
+    appendSubMatrixToMatrix(matrix, piece.matrix, { x: 0, y: 0 })
+}
+
 function takeRandomPiece() {
     let totalPieces = pieces.length - 1
     let randomPieceIndex = Math.round(Math.random() * totalPieces)

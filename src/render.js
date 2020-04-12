@@ -1,17 +1,19 @@
-var context
+// import { matrix } from "./data";
+
+let context
 
 const SQUARE_SIDE = 40;
 const SQUARE_SIDE_PADDING = 5;
 
-function initCanvas(canvasId) {
-    var canvas = document.getElementById(canvasId)
+export function initCanvas(canvasId) {
+    let canvas = document.getElementById(canvasId)
 
     context = canvas.getContext("2d")
     context.canvas.width = window.innerWidth
     context.canvas.height = window.innerHeight
 }
 
-function drawMatrix() {
+export function drawMatrix(matrix) {
     let height = matrix.length
     let width = matrix[0].length
 
@@ -21,9 +23,7 @@ function drawMatrix() {
                 x: x * SQUARE_SIDE,
                 y: y * SQUARE_SIDE
             }
-            let color = matrix[x][y] !== 1
-                ? "#161616"
-                : "yellow"
+            let color = getColor(matrix[x][y])
 
             drawSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
         }
