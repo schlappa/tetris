@@ -30,6 +30,18 @@ function drawMatrix() {
     }
 }
 
+function getColor(value) {
+    switch (value) {
+        case 0: return "#161616"
+        case 1: return "red"
+        case 2: return "blue"
+        case 3: return "brown"
+        case 4: return "green"
+        case 5: return "cyan"
+        case 6: return "white"
+        case 7: return "magenta"
+    }
+}
 function drawSquare(position, side, padding, color) {
     context.fillStyle = color
     context.fillRect(
