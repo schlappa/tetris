@@ -10,3 +10,5 @@ function init() {
 }
 
 run()
+
+// TODO: impelement a pseudo random number generator 
