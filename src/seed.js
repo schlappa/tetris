@@ -1,6 +1,6 @@
 [
     {
-        piece: "I",
+        name: "I",
         matrix: [
             [1],
             [1],
@@ -10,52 +10,51 @@
         color: "red"
     },
     {
-        piece: "O",
+        name: "O",
         matrix: [
-            [1,1],
-            [1,1]
+            [2, 2],
+            [2, 2]
         ],
         color: "blue"
     },
     {
-        piece: "T",
+        name: "T",
         matrix: [
-            [1,1,1],
-            [0,1,0]
+            [3, 3, 3],
+            [0, 3, 0]
         ],
         color: "brown"
     },
     {
-        piece: "S",
+        name: "S",
         matrix: [
-            [0,1,1],
-            [1,1,0]
+            [0, 4, 4],
+            [4, 4, 0]
         ],
         color: "green"
     },
     {
-        piece: "Z",
+        name: "Z",
         matrix: [
-            [1,1,0],
-            [0,1,1]
+            [5, 5, 0],
+            [0, 5, 5]
         ],
         color: "cyan"
     },
     {
-        piece: "J",
+        name: "J",
         matrix: [
-            [0,1],
-            [0,1],
-            [1,1]
+            [0, 6],
+            [0, 6],
+            [6, 6]
         ],
         color: "white"
     },
     {
-        piece: "L",
+        name: "L",
         matrix: [
-            [1,0],
-            [1,0],
-            [1,1]
+            [7, 0],
+            [7, 0],
         ],
         color: "magenta"
     }
