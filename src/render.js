@@ -21,9 +21,9 @@ function drawMatrix() {
                 x: x * SQUARE_SIDE,
                 y: y * SQUARE_SIDE
             }
-            let color = matrix[x][y] === 1
-                ? "yellow"
-                : "#222"
+            let color = matrix[x][y] !== 1
+                ? "#161616"
+                : "yellow"
 
             drawSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
         }
