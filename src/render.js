@@ -42,6 +42,18 @@ function getColor(value) {
         case 7: return "magenta"
     }
 }
+
+export function appendSubMatrixToMatrix(matrix, subMatrix, position) {
+    let height = subMatrix.length
+    let width = subMatrix[0].length
+
+    for (let x = 0; x < height; x++) {
+        for (let y = 0; y < width; y++) {
+            matrix[position.x + x][position.y + y] = subMatrix[x][y]
+        }
+    }
+}
+
 function drawSquare(position, side, padding, color) {
     context.fillStyle = color
     context.fillRect(
