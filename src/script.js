@@ -1,9 +1,17 @@
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
+var context;
 
-// configuration
-context.font = "30px Arial";
-context.color = "#FFF";
+function init() {
+    var canvas = document.getElementById("canvas");
+    
+    context = canvas.getContext("2d");
+    context.canvas.width = window.innerWidth;
+    context.canvas.height = window.innerHeight;
+}
 
-// test
-context.fillText("Hello World", 10, 50);
+function draw() {
+    context.fillStyle = "yellow";
+    context.fillRect(0, 0, 250, 100)
+}
+
+init();
+draw();
