@@ -1,5 +1,3 @@
-// import { matrix } from "./data";
-
 let context
 
 const SQUARE_SIDE = 40;
@@ -17,8 +15,8 @@ export function drawMatrix(matrix) {
     let height = matrix.length
     let width = matrix[0].length
 
-    for (let x = 0; x < height; x++) {
-        for (let y = 0; y < width; y++) {
+    for (let y = 0; y < width; y++) {
+        for (let x = 0; x < height; x++) {
             let position = {
                 x: x * SQUARE_SIDE,
                 y: y * SQUARE_SIDE
@@ -47,11 +45,9 @@ export function appendSubMatrixToMatrix(matrix, subMatrix, position) {
     let height = subMatrix.length
     let width = subMatrix[0].length
 
-    for (let x = 0; x < height; x++) {
-        for (let y = 0; y < width; y++) {
-            matrix[position.x + x][position.y + y] = subMatrix[x][y]
-        }
-    }
+    for (let y = 0; y < width; y++)
+        for (let x = 0; x < height; x++)
+            matrix[position.y + y][position.x + x] = subMatrix[x][y]
 }
 
 function drawSquare(position, side, padding, color) {

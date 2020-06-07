@@ -3,13 +3,13 @@ import { appendSubMatrixToMatrix } from './render.js'
 
 export let matrix
 
-export function initMatrix(height, width) {
+export function initMatrix(width, height) {
     matrix = []
 
-    for (let x = 0; x < height; x++) {
-        matrix[x] = [];
-        for (let y = 0; y < width; y++) {
-            matrix[x][y] = 0
+    for (let y = 0; y < width; y++) {
+        matrix[y] = [];
+        for (let x = 0; x < height; x++) {
+            matrix[y][x] = 0
         }
     }
 
