@@ -1,4 +1,4 @@
-export let pieces = [
+export let shapes = [
     {
         name: "I",
         matrix: [
