@@ -1,6 +1,6 @@
 import { shapes } from './shapes.js'
 import { createShape } from './shapeFactory.js'
-import { appendSubMatrixToMatrix } from './render.js'
+import { renderShapes } from './render.js'
 
 export let matrix
 export let shapesPool = []
@@ -20,7 +20,7 @@ export function initMatrix(width, height) {
     shapesPool.push(shapeInstance)
     console.log(shapesPool)
 
-    appendSubMatrixToMatrix(matrix, shapeInstance.shape.matrix, { x: 0, y: 0 })
+    renderShapes(matrix, shapesPool)
 }
 
 function takeRandomShape() {

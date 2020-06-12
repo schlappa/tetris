@@ -41,7 +41,13 @@ function getColor(value) {
     }
 }
 
-export function appendSubMatrixToMatrix(matrix, subMatrix, position) {
+export function renderShapes(matrix, shapesPool) {
+    shapesPool.forEach(shape => {
+        appendSubMatrixToMatrix(matrix, shape.shape.matrix, { x: 0, y: 0 })
+    })
+}
+
+function appendSubMatrixToMatrix(matrix, subMatrix, position) {
     let height = subMatrix.length
     let width = subMatrix[0].length
 
