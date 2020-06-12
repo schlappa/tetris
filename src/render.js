@@ -42,9 +42,7 @@ function getColor(value) {
 }
 
 export function renderShapes(matrix, shapesPool) {
-    shapesPool.forEach(shape => {
-        appendSubMatrixToMatrix(matrix, shape.shape.matrix, { x: 0, y: 0 })
-    })
+    shapesPool.forEach(shape => appendSubMatrixToMatrix(matrix, shape.shape.matrix, { x: 0, y: 0 }))
 }
 
 function appendSubMatrixToMatrix(matrix, subMatrix, position) {
