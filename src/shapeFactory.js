@@ -3,17 +3,18 @@ import { getTimestamp, getMatrixCellById, getMatrixCellByPosition, getEdgeSizes 
 export function createShape(matrix, shape) {
     // TODO: verify if the position is available to append the shape matrix
 
-    const startPosition = { x: 1, y: 1 }
+    const guid = getTimestamp()
+    const startPosition = { x: 0, y: 0 }
     const shapeInstance = {
-        guid: getTimestamp(),
+        guid: guid,
         shape: shape,
-        squares: createSquares(matrix, shape, startPosition)
+        squares: createSquares(matrix, shape, guid, startPosition)
     };
 
     return shapeInstance;
 }
 
-function createSquares(matrix, shape, startPosition) {
+function createSquares(matrix, shape, guidShape, startPosition) {
     const shapeMatrix = shape.matrix
     const [height, width] = getEdgeSizes(shapeMatrix)
     const squares = []
@@ -30,6 +31,7 @@ function createSquares(matrix, shape, startPosition) {
                 const color = shape.color
                 const square = createSquare(
                     matrix,
+                    guidShape,
                     matrixPosition,
                     shapeMatrixPosition,
                     color)
@@ -40,30 +42,34 @@ function createSquares(matrix, shape, startPosition) {
     }
 }
 
-function createSquare(matrix, matrixPosition, shapeMatrixPosition, color) {
+function createSquare(matrix, guidShape, matrixPosition, shapeMatrixPosition, color) {
     const square = {
         guid: getTimestamp(),
+        guidShape: guidShape,
         matrixPosition: matrixPosition,
         shapeMatrixPosition: shapeMatrixPosition,
         color: color
     }
+    const cell = getMatrixCellByPosition(matrix, matrixPosition.x, matrixPosition.y)
     
-    matrix[matrixPosition.x][matrixPosition.y].square = square
+    cell.square = square
 
     return square
 }
 
 export function increaseGravityForShape(matrix, shapeInstance) {
     const shapeMatrix = shapeInstance.shape.matrix
-    const height = shapeMatrix.length
-    const width = shapeMatrix[0].length
+    const squaresToDown = matrix
+        .flat()
+        .filter(cell =>
+            cell.square !== undefined &&
+            cell.square.guidShape === shapeInstance.guid)
+    console.log('squaresToDown', squaresToDown)
 
-    for (let x = 0; x < height; x++) {
-        for (let y = 0; y < width; y++) {
-            const shapeMatrixCell = shapeMatrix[x][y]
-            const matrixCell = getMatrixCellById(matrix, shapeMatrixCell.guid)
+    squaresToDown.map(cell => {
+        const nextCell = getMatrixCellByPosition(matrix, cell.x, cell.y + 1)
 
-
-        }
-    }
+        console.log('cell', cell)
+        console.log('nextCell', nextCell)
+    })
 }

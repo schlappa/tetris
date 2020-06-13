@@ -1,27 +1,27 @@
 import { shapes } from './shapes.js'
 import { createShape, increaseGravityForShape } from './shapeFactory.js'
-import { drawMatrix } from './render.js'
+import { renderMatrix } from './render.js'
 
 export let matrix = []
 export let shapesPool = []
 
 export function initMatrix(width, height) {
     for (let x = 0; x < height; x++) {
-        matrix[x] = [];
         for (let y = 0; y < width; y++) {
-            matrix[x][y] = {
+            matrix.push({
                 x: x,
                 y: y,
                 square: undefined
-            }
+            })
         }
     }
 
     const shape = takeRandomShape()
     const shapeInstance = createShape(matrix, shape)
+    
     shapesPool.push(shapeInstance)
 
-    drawMatrix(matrix)
+    renderMatrix(matrix)
 }
 
 function takeRandomShape() {

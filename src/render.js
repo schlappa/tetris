@@ -1,4 +1,4 @@
-import { wait, getEdgeSizes } from './utils.js'
+import { wait } from './utils.js'
 
 let context
 
@@ -13,25 +13,23 @@ export function initCanvas(canvasId) {
     context.canvas.height = window.innerHeight
 }
 
-export async function drawMatrix(matrix) {
-    const [height, width] = getEdgeSizes(matrix)
-
-    for (let x = 0; x < height; x++) {
-        for (let y = 0; y < width; y++) {
-            await wait(3);
-
-            const position = {
-                x: y * SQUARE_SIDE,
-                y: x * SQUARE_SIDE
-            }
-            const color = (matrix[x][y].square !== undefined) ? matrix[x][y].square.color : "#161616"
-
-            drawSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
-        }
-    }
+export function renderMatrix(matrix) {
+    matrix.map(cell => renderCell(cell))
 }
 
-function drawSquare(position, side, padding, color) {
+async function renderCell(cell) {
+    await wait(3);
+
+    const position = {
+        x: cell.y * SQUARE_SIDE,
+        y: cell.x * SQUARE_SIDE
+    }
+    const color = (cell.square !== undefined) ? cell.square.color : "#161616"
+
+    renderSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
+}
+
+function renderSquare(position, side, padding, color) {
     context.fillStyle = color
     context.fillRect(
         position.x + padding,

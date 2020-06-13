@@ -22,13 +22,15 @@ export function getEdgeSizes(matrix) {
 }
 
 export function getMatrixCellById(matrix, guid) {
-    return matrix.filter(cell =>
-        cell.square !== undefined &&
-        cell.square.guid == guid)
+    return matrix
+        .find(cell =>
+            cell.square !== undefined &&
+            cell.square.guid == guid)
 }
 
 export function getMatrixCellByPosition(matrix, x, y) {
-    return matrix.filter(cell =>
-        cell.x == x &&
-        cell.y == y)
+    return matrix
+        .find(cell =>
+            cell.x == x &&
+            cell.y == y)
 }
