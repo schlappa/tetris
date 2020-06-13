@@ -27,7 +27,7 @@ export async function drawMatrix(matrix) {
                 x: y * SQUARE_SIDE,
                 y: x * SQUARE_SIDE
             }
-            const color = (matrix[x][y] !== undefined) ? matrix[x][y].color : "#161616"
+            const color = (matrix[x][y].square !== undefined) ? matrix[x][y].square.color : "#161616"
 
             drawSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
         }

@@ -1,5 +1,5 @@
 import { shapes } from './shapes.js'
-import { createShape } from './shapeFactory.js'
+import { createShape, increaseGravityForShape } from './shapeFactory.js'
 import { drawMatrix } from './render.js'
 
 export let matrix = []
@@ -9,7 +9,11 @@ export function initMatrix(width, height) {
     for (let x = 0; x < height; x++) {
         matrix[x] = [];
         for (let y = 0; y < width; y++) {
-            matrix[x][y] = undefined
+            matrix[x][y] = {
+                x: x,
+                y: y,
+                square: undefined
+            }
         }
     }
 
@@ -25,4 +29,8 @@ function takeRandomShape() {
     const randomPieceIndex = Math.round(Math.random() * totalPieces)
 
     return shapes[randomPieceIndex]
+}
+
+export function increaseGravity() {
+    shapesPool.forEach(shapeInstance => increaseGravityForShape(matrix, shapeInstance));
 }

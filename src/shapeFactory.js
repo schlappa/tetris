@@ -31,7 +31,7 @@ function createSquares(matrix, subMatrix, startPosition) {
 
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
-            const matrixCellIsEmpty = matrix[startPosition.x + x][startPosition.y + y] === undefined
+            const matrixCellIsEmpty = matrix[startPosition.x + x][startPosition.y + y].square === undefined
             const subMatrixIsNotEmpty = subMatrix[x][y] != 0
 
             if (matrixCellIsEmpty && subMatrixIsNotEmpty) {
@@ -43,7 +43,7 @@ function createSquares(matrix, subMatrix, startPosition) {
                     subMatrixPosition,
                     timestamp(),
                     getColor(subMatrix[x][y]))
-                
+
                 squares.push(square)
             }
         }
@@ -57,8 +57,8 @@ function createSquare(matrix, matrixPosition, subMatrixPosition, timestamp, colo
         subMatrixPosition: subMatrixPosition,
         color: color
     }
-    matrix[matrixPosition.x][matrixPosition.y] = square
-    
+    matrix[matrixPosition.x][matrixPosition.y].square = square
+
     return square
 }
 
@@ -72,4 +72,25 @@ function getColor(value) {
         case 6: return "white"
         case 7: return "magenta"
     }
+}
+
+export function increaseGravityForShape(matrix, shapeInstance) {
+    const subMatrix = shapeInstance.shape.matrix
+    const height = subMatrix.length
+    const width = subMatrix[0].length
+
+    for (let x = 0; x < height; x++) {
+        for (let y = 0; y < width; y++) {
+            const subMatrixCell = subMatrix[x][y]
+            const matrixCell = getMatrixCell(matrix, subMatrixCell.guid)
+
+
+        }
+    }
+}
+
+function getMatrixCell(matrix, guid) {
+    return matrix.filter(cell =>
+        cell !== undefined &&
+        cell.guid == guid)
 }
