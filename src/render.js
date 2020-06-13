@@ -1,4 +1,4 @@
-import { wait } from './utils.js'
+import { wait, getEdgeSizes } from './utils.js'
 
 let context
 
@@ -14,10 +14,7 @@ export function initCanvas(canvasId) {
 }
 
 export async function drawMatrix(matrix) {
-    console.log(matrix)
-    
-    const height = matrix.length
-    const width = matrix[0].length
+    const [height, width] = getEdgeSizes(matrix)
 
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {

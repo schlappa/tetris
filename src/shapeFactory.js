@@ -1,9 +1,11 @@
+import { getTimestamp, getMatrixCellById, getMatrixCellByPosition, getEdgeSizes } from './utils.js'
+
 export function createShape(matrix, shape) {
     // TODO: verify if the position is available to append the shape matrix
 
     const startPosition = { x: 1, y: 1 }
     const shapeInstance = {
-        guid: timestamp(),
+        guid: getTimestamp(),
         shape: shape,
         squares: createSquares(matrix, shape.matrix, startPosition)
     };
@@ -11,23 +13,9 @@ export function createShape(matrix, shape) {
     return shapeInstance;
 }
 
-function timestamp() {
-    const timeStampInMs =
-        window.performance &&
-            window.performance.now &&
-            window.performance.timing &&
-            window.performance.timing.navigationStart
-            ? window.performance.now() + window.performance.timing.navigationStart
-            : Date.now()
-
-    return timeStampInMs
-}
-
 function createSquares(matrix, subMatrix, startPosition) {
-    const height = subMatrix.length
-    const width = subMatrix[0].length
-
-    let squares = []
+    const [height, width] = getEdgeSizes(subMatrix)
+    const squares = []
 
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
@@ -41,7 +29,7 @@ function createSquares(matrix, subMatrix, startPosition) {
                     matrix,
                     matrixPosition,
                     subMatrixPosition,
-                    timestamp(),
+                    getTimestamp(),
                     getColor(subMatrix[x][y]))
 
                 squares.push(square)
@@ -82,15 +70,9 @@ export function increaseGravityForShape(matrix, shapeInstance) {
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
             const subMatrixCell = subMatrix[x][y]
-            const matrixCell = getMatrixCell(matrix, subMatrixCell.guid)
+            const matrixCell = getMatrixCellById(matrix, subMatrixCell.guid)
 
 
         }
     }
-}
-
-function getMatrixCell(matrix, guid) {
-    return matrix.filter(cell =>
-        cell !== undefined &&
-        cell.guid == guid)
 }
