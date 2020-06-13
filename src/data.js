@@ -13,16 +13,16 @@ export function initMatrix(width, height) {
         }
     }
 
-    let shape = takeRandomShape()
-    var shapeInstance = createShape(matrix, shape)
+    const shape = takeRandomShape()
+    const shapeInstance = createShape(matrix, shape)
     shapesPool.push(shapeInstance)
 
     drawMatrix(matrix)
 }
 
 function takeRandomShape() {
-    let totalPieces = shapes.length - 1
-    let randomPieceIndex = Math.round(Math.random() * totalPieces)
+    const totalPieces = shapes.length - 1
+    const randomPieceIndex = Math.round(Math.random() * totalPieces)
 
     return shapes[randomPieceIndex]
 }

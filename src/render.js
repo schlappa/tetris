@@ -1,3 +1,5 @@
+import { wait } from './utils.js'
+
 let context
 
 const SQUARE_SIDE = 40;
@@ -30,10 +32,6 @@ export async function drawMatrix(matrix) {
             drawSquare(position, SQUARE_SIDE, SQUARE_SIDE_PADDING, color)
         }
     }
-}
-
-async function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 function drawSquare(position, side, padding, color) {

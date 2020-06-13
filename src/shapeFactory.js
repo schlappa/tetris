@@ -12,7 +12,7 @@ export function createShape(matrix, shape) {
 }
 
 function timestamp() {
-    var timeStampInMs =
+    const timeStampInMs =
         window.performance &&
             window.performance.now &&
             window.performance.timing &&
