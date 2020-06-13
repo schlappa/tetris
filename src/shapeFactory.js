@@ -14,25 +14,24 @@ export function createShape(matrix, shape) {
 }
 
 function createSquares(matrix, shape, startPosition) {
-    const subMatrix = shape.matrix
-
-    const [height, width] = getEdgeSizes(subMatrix)
+    const shapeMatrix = shape.matrix
+    const [height, width] = getEdgeSizes(shapeMatrix)
     const squares = []
 
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
             const matrixCell = getMatrixCellByPosition(matrix, startPosition.x + x, startPosition.y + y)
             const matrixCellIsEmpty = matrixCell.square === undefined
-            const subMatrixIsNotEmpty = subMatrix[x][y] != 0
+            const shapeMatrixIsNotEmpty = shapeMatrix[x][y] != 0
 
-            if (matrixCellIsEmpty && subMatrixIsNotEmpty) {
+            if (matrixCellIsEmpty && shapeMatrixIsNotEmpty) {
                 const matrixPosition = { x: startPosition.x + x, y: startPosition.y + y }
-                const subMatrixPosition = { x: x, y: y }
+                const shapeMatrixPosition = { x: x, y: y }
                 const color = shape.color
                 const square = createSquare(
                     matrix,
                     matrixPosition,
-                    subMatrixPosition,
+                    shapeMatrixPosition,
                     color)
 
                 squares.push(square)
@@ -41,11 +40,11 @@ function createSquares(matrix, shape, startPosition) {
     }
 }
 
-function createSquare(matrix, matrixPosition, subMatrixPosition, color) {
+function createSquare(matrix, matrixPosition, shapeMatrixPosition, color) {
     const square = {
         guid: getTimestamp(),
         matrixPosition: matrixPosition,
-        subMatrixPosition: subMatrixPosition,
+        shapeMatrixPosition: shapeMatrixPosition,
         color: color
     }
     
@@ -55,14 +54,14 @@ function createSquare(matrix, matrixPosition, subMatrixPosition, color) {
 }
 
 export function increaseGravityForShape(matrix, shapeInstance) {
-    const subMatrix = shapeInstance.shape.matrix
-    const height = subMatrix.length
-    const width = subMatrix[0].length
+    const shapeMatrix = shapeInstance.shape.matrix
+    const height = shapeMatrix.length
+    const width = shapeMatrix[0].length
 
     for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
-            const subMatrixCell = subMatrix[x][y]
-            const matrixCell = getMatrixCellById(matrix, subMatrixCell.guid)
+            const shapeMatrixCell = shapeMatrix[x][y]
+            const matrixCell = getMatrixCellById(matrix, shapeMatrixCell.guid)
 
 
         }
