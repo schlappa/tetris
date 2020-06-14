@@ -21,7 +21,7 @@ function createSquares(matrix, shape, guidShape, startPosition) {
         return matrixCell.square !== undefined
     })
     if (shapeCannotBeCreated) {
-        console.log('is not possible create more shapes')
+        console.log('it is not possible create more shapes')
         return
     }
     
