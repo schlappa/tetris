@@ -1,4 +1,4 @@
-import { getTimestamp, getMatrixCellById, getMatrixCellByPosition, getEdgeSizes } from './utils.js'
+import { getTimestamp, getMatrixCellById, getMatrixCellByPosition } from './utils.js'
 
 export function createShape(matrix, shape) {
     // TODO: verify if the position is available to append the shape matrix
@@ -15,31 +15,35 @@ export function createShape(matrix, shape) {
 }
 
 function createSquares(matrix, shape, guidShape, startPosition) {
-    const shapeMatrix = shape.matrix
-    const [height, width] = getEdgeSizes(shapeMatrix)
+    const shapeCannotBeCreated = shape.squares.some(squarePosition => {
+        const matrixCell = getMatrixCellByPosition(matrix, startPosition.x + squarePosition.x, startPosition.y + squarePosition.y)
+        
+        return matrixCell.square !== undefined
+    })
+    if (shapeCannotBeCreated) {
+        console.log('is not possible create more shapes')
+        return
+    }
+    
     const squares = []
 
-    for (let x = 0; x < height; x++) {
-        for (let y = 0; y < width; y++) {
-            const matrixCell = getMatrixCellByPosition(matrix, startPosition.x + x, startPosition.y + y)
-            const matrixCellIsEmpty = matrixCell.square === undefined
-            const shapeMatrixIsNotEmpty = shapeMatrix[x][y] != 0
+    shape.squares.map(squarePosition => {
+        const matrixCell = getMatrixCellByPosition(matrix, startPosition.x + squarePosition.x, startPosition.y + squarePosition.y)
+        const matrixCellIsEmpty = matrixCell.square === undefined
 
-            if (matrixCellIsEmpty && shapeMatrixIsNotEmpty) {
-                const matrixPosition = { x: startPosition.x + x, y: startPosition.y + y }
-                const shapeMatrixPosition = { x: x, y: y }
-                const color = shape.color
-                const square = createSquare(
-                    matrix,
-                    guidShape,
-                    matrixPosition,
-                    shapeMatrixPosition,
-                    color)
+        if (matrixCellIsEmpty) {
+            const matrixPosition = { x: startPosition.x + squarePosition.x, y: startPosition.y + squarePosition.y }
+            const color = shape.color
+            const square = createSquare(
+                matrix,
+                guidShape,
+                matrixPosition,
+                squarePosition,
+                color)
 
-                squares.push(square)
-            }
+            squares.push(square)
         }
-    }
+    })
 }
 
 function createSquare(matrix, guidShape, matrixPosition, shapeMatrixPosition, color) {
@@ -51,25 +55,36 @@ function createSquare(matrix, guidShape, matrixPosition, shapeMatrixPosition, co
         color: color
     }
     const cell = getMatrixCellByPosition(matrix, matrixPosition.x, matrixPosition.y)
-    
+
     cell.square = square
 
     return square
 }
 
 export function increaseGravityForShape(matrix, shapeInstance) {
-    const shapeMatrix = shapeInstance.shape.matrix
-    const squaresToDown = matrix
-        .flat()
-        .filter(cell =>
-            cell.square !== undefined &&
-            cell.square.guidShape === shapeInstance.guid)
-    console.log('squaresToDown', squaresToDown)
+    const cellsToDown = matrix.filter(cell =>
+        cell.square !== undefined &&
+        cell.square.guidShape === shapeInstance.guid)
+    const nextCellsToDown = cellsToDown.map(cell => getMatrixCellByPosition(matrix, cell.x, cell.y + 1))
 
-    squaresToDown.map(cell => {
-        const nextCell = getMatrixCellByPosition(matrix, cell.x, cell.y + 1)
+    const shapeIsBlockedToMove = nextCellsToDown.some(cell =>
+        cell !== undefined &&
+        cell.square !== undefined &&
+        !cellsToDown.includes(cell))
+    if (shapeIsBlockedToMove)
+        return
 
-        console.log('cell', cell)
-        console.log('nextCell', nextCell)
-    })
+    // TODO: change hardcoded 20 value
+    const shapeIsOnBase = cellsToDown.some(cell => 20 == cell.y + 1)
+    if (shapeIsOnBase)
+        return
+
+    cellsToDown
+        .reverse()
+        .map(cell => {
+            const nextCell = getMatrixCellByPosition(matrix, cell.x, cell.y + 1)
+
+            nextCell.square = cell.square
+            cell.square = undefined
+        })
 }

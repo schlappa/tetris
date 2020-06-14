@@ -1,5 +1,3 @@
-import { wait } from './utils.js'
-
 let context
 
 const SQUARE_SIDE = 40;
@@ -18,11 +16,9 @@ export function renderMatrix(matrix) {
 }
 
 async function renderCell(cell) {
-    await wait(3);
-
     const position = {
-        x: cell.y * SQUARE_SIDE,
-        y: cell.x * SQUARE_SIDE
+        x: cell.x * SQUARE_SIDE,
+        y: cell.y * SQUARE_SIDE
     }
     const color = (cell.square !== undefined) ? cell.square.color : "#161616"
 

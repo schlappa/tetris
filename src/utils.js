@@ -14,13 +14,6 @@ export function getTimestamp() {
     return timeStampInMs
 }
 
-export function getEdgeSizes(matrix) {
-    const height = matrix.length
-    const width = matrix[0].length
-
-    return [height, width]
-}
-
 export function getMatrixCellById(matrix, guid) {
     return matrix
         .find(cell =>

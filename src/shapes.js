@@ -7,6 +7,12 @@ export let shapes = [
             [1],
             [1],
             [1]
+        ],
+        squares: [
+            { x: 0, y: 0 },
+            { x: 0, y: 1 },
+            { x: 0, y: 2 },
+            { x: 0, y: 3 }
         ]
     }, {
         name: "O",
@@ -14,6 +20,12 @@ export let shapes = [
         matrix: [
             [2, 2],
             [2, 2]
+        ],
+        squares: [
+            { x: 0, y: 0 },
+            { x: 0, y: 1 },
+            { x: 1, y: 0 },
+            { x: 1, y: 1 }
         ]
     }, {
         name: "T",
@@ -21,6 +33,12 @@ export let shapes = [
         matrix: [
             [3, 3, 3],
             [0, 3, 0]
+        ],
+        squares: [
+            { x: 0, y: 0 },
+            { x: 1, y:  0},
+            { x: 2, y: 0 },
+            { x: 1, y: 1 }
         ]
     }, {
         name: "S",
@@ -28,6 +46,12 @@ export let shapes = [
         matrix: [
             [0, 4, 4],
             [4, 4, 0]
+        ],
+        squares: [
+            { x: 1, y: 0 },
+            { x: 2, y: 0 },
+            { x: 0, y: 1 },
+            { x: 1, y: 1 }
         ]
     }, {
         name: "Z",
@@ -35,6 +59,12 @@ export let shapes = [
         matrix: [
             [5, 5, 0],
             [0, 5, 5]
+        ],
+        squares: [
+            { x: 0, y: 0 },
+            { x: 1, y: 0 },
+            { x: 1, y: 1 },
+            { x: 2, y: 1 }
         ]
     }, {
         name: "J",
@@ -43,6 +73,12 @@ export let shapes = [
             [0, 6],
             [0, 6],
             [6, 6]
+        ],
+        squares: [
+            { x: 1, y: 0, },
+            { x: 1, y: 1, },
+            { x: 0, y: 2, },
+            { x: 1, y: 2, }
         ]
     }, {
         name: "L",
@@ -51,6 +87,12 @@ export let shapes = [
             [7, 0],
             [7, 0],
             [7, 7]
+        ],
+        squares: [
+            { x: 0, y: 0 },
+            { x: 0, y: 1 },
+            { x: 0, y: 2 },
+            { x: 1, y: 2 }
         ]
     }
 ]

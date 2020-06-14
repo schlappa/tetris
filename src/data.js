@@ -1,13 +1,14 @@
 import { shapes } from './shapes.js'
 import { createShape, increaseGravityForShape } from './shapeFactory.js'
 import { renderMatrix } from './render.js'
+import { wait } from './utils.js'
 
 export let matrix = []
 export let shapesPool = []
 
-export function initMatrix(width, height) {
-    for (let x = 0; x < height; x++) {
-        for (let y = 0; y < width; y++) {
+export async function initMatrix(width, height) {
+    for (let x = 0; x < width; x++) {
+        for (let y = 0; y < height; y++) {
             matrix.push({
                 x: x,
                 y: y,
@@ -16,12 +17,25 @@ export function initMatrix(width, height) {
         }
     }
 
+    renderMatrix(matrix)
+
+    let ticks = 0;
+    while (true) {
+        if (ticks++ % 5 == 0)
+            addNewShape()
+
+        increaseGravity()
+        renderMatrix(matrix)
+
+        await wait(300)
+    }
+}
+
+function addNewShape() {
     const shape = takeRandomShape()
     const shapeInstance = createShape(matrix, shape)
-    
-    shapesPool.push(shapeInstance)
 
-    renderMatrix(matrix)
+    shapesPool.push(shapeInstance)
 }
 
 function takeRandomShape() {
